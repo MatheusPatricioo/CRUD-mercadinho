@@ -1,7 +1,7 @@
 <?php
 
 // Conexão com o banco de dados
-$db_name = 'test'; // Nome do banco de dados
+$db_name = 'teste2'; // Nome do banco de dados
 $db_host = 'localhost'; // Endereço do servidor do banco de dados
 $db_user = 'root'; // Usuário do banco de dados
 $db_pass = ''; // Senha do banco de dados

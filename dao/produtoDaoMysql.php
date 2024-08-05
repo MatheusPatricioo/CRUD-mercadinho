@@ -1,6 +1,5 @@
 <?php
-
-require_once 'models/Protudo';
+require_once 'models/Produto.php';
 class ProdutoDaoMysql implements ProdutoDAO {
     private $pdo;
 
@@ -9,18 +8,48 @@ class ProdutoDaoMysql implements ProdutoDAO {
     }
 
     public function add(Produto $u){
-        $sql = $this->pdo->prepare("INSERT INTO Produtos (nome, valor) VALUES (:nome, :valor");
+        $sql = $this->pdo->prepare("INSERT INTO Produtos (nome, valor) VALUES (:nome, :valor)");
         $sql->bindValue(':nome', $u->getNome());
-
-    } 
+        $sql->bindValue(':valor', $u->getValor());
+        $sql->execute();
+    }
+    
     public function update(Produto $u){ // atualiza no bd;
     }
-    public function delete(Produto $id){ // deleta no bd;
+
+    public function findAll() {
+        $array = [];
+    
+        $sql = $this->pdo->query("SELECT id, nome, valor FROM produtos"); // Seleciona apenas as colunas necessárias
+        if ($sql->rowCount() > 0) {
+            $data = $sql->fetchAll(PDO::FETCH_ASSOC);
+    
+            foreach ($data as $item) {
+                $produto = new Produto();
+                $produto->setId($item['id']);
+                $produto->setNome($item['nome']);
+                $produto->setValor($item['valor']);
+    
+                $array[] = $produto;
+            }
+        }
+    
+        return $array;
     }
-    public function findALL(){ // pega todo mundo;
-    }
+
     public function findById($id) {
-
+        $sql = "SELECT * FROM produtos WHERE id = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        return $stmt->fetchObject('Produto');
     }
-
+    
+    public function delete($id)
+    {
+        $sql = $this->pdo->prepare("DELETE FROM produtos WHERE id =:id");
+        $sql->bindValue(':id', $id);
+        $sql->execute();
+    }
 } 
