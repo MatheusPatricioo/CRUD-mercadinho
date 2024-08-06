@@ -1,5 +1,5 @@
 <?php
-// editar_action.php
+
 require 'config.php';
 require 'dao/ProdutoDaoMysql.php';
 
@@ -16,7 +16,7 @@ if ($id && $name && $valor) {
     $produto->setValor($valor);
 
     // Debug: Imprimir valores para verificação
-    echo "id: $id, Nome: $name, Valor: $valor<br>";
+    // echo "id: $id, Nome: $name, Valor: $valor<br>";
 
     $resultado = $produtoDao->update($produto);
 
@@ -28,6 +28,7 @@ if ($id && $name && $valor) {
         exit;
     }
 } else {
-    header("Location: editar.php?ID=" . $id);
+    header("Location: editar.php?id=" . $id);
     exit;
 }
+

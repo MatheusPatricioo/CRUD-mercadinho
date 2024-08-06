@@ -15,13 +15,25 @@ class ProdutoDaoMysql implements ProdutoDAO {
     }
     
     public function update(Produto $produto) {
-        $sql = "UPDATE usuarios SET nome = :nome, valor = :valor WHERE id = :id";
+        $sql = "UPDATE produtos SET nome = :nome, valor = :valor WHERE id = :id";
         $stmt = $this->pdo->prepare($sql);
+    
+        // Debug: Imprimir a consulta SQL
+        // echo "Consulta: " . $stmt->queryString . "<br>";
+    
         $stmt->bindValue(':nome', $produto->getNome());
-        $stmt->bindValue(':valor', $produto->getValor()); // Adiciona o bindValue para o valor
+        $stmt->bindValue(':valor', $produto->getValor());
         $stmt->bindValue(':id', $produto->getId());
-        return $stmt->execute();
+    
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            echo "Erro ao atualizar: " . print_r($stmt->errorInfo(), true);
+            return false;
+        }
     }
+    
+    
     
 
     public function findAll() {

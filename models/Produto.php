@@ -37,4 +37,5 @@ interface ProdutoDAO {
     public function findById($id); //quero encontrar 1 cara só
     //public function findByOQ QUERO ENCONTRAR(OQ QUERO ENCONTRAR);
     // esse findALGUMA COISA, é pra encontrar um item por aquele "id";
+    public function findByValor($valor);
 }

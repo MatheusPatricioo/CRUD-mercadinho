@@ -1,4 +1,5 @@
 <?php
+
 require 'config.php';
 require 'dao/ProdutoDaoMysql.php';
 
@@ -34,8 +35,8 @@ if ($produto === false) {
             <label for="name">Nome do Produto:</label>
             <input type="text" id="name" name="name" value="<?= $produto->getNome(); ?>" required />
 
-            <label for="value">Valor Unitário:</label>
-            <input type="text" id="value" name="value" value="<?= $produto->getValor(); ?>" required />
+            <label for="valor">Valor Unitário:</label>
+            <input type="text" id="valor" name="valor" value="<?= $produto->getValor(); ?>" required />
 
             <button type="submit">Salvar</button>
         </form>
