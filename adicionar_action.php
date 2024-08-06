@@ -21,6 +21,7 @@ try {
     }
 
     // Inserir o produto
+    //stmt é uma uma instância da classe PDOStatement. usamos pra aumentar a segurança;
     $sql = "INSERT INTO produtos (nome, valor) VALUES (:nome, :valor)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':nome', $nome);
